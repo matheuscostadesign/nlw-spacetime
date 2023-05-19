@@ -36,3 +36,42 @@ module.exports = {
   plugins: [require("prettier-plugin-tailwindcss")],
 };
 ```
+
+- Instalar fontes
+  https://github.com/expo/google-fonts
+  `npx expo install @expo-google-fonts/bai-jamjuree expo-font`
+
+  - Import de imagens no Tyscript
+  - Criar arquivo em "src/assets/assets.d.ts"
+
+  ```ts
+  declare module "*.png";
+  ```
+
+- Instalar suporte p/ arquivos SVG
+  https://github.com/kristerkari/react-native-svg-transformer
+  `npx expo install react-native-svg`
+  `npm i react-native-svg-transformer -D`
+  Criar arquivo "metro.config.js"
+
+  ```js
+  const { getDefaultConfig } = require("expo/metro-config");
+
+  module.exports = (() => {
+    const config = getDefaultConfig(__dirname);
+
+    const { transformer, resolver } = config;
+
+    config.transformer = {
+      ...transformer,
+      babelTransformerPath: require.resolve("react-native-svg-transformer"),
+    };
+    config.resolver = {
+      ...resolver,
+      assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
+      sourceExts: [...resolver.sourceExts, "svg"],
+    };
+
+    return config;
+  })();
+  ```

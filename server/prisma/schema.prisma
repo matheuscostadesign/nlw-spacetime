@@ -9,6 +9,23 @@ datasource db {
 
 // Tabela Usuario
 model User {
-  id   String @id @default(uuid()) // primary-key & guid
-  nome String
+  id        String @id @default(uuid()) // primary-key & guid
+  githubId  Int    @unique
+  nome      String
+  login     String
+  avatarUrl String
+
+  memories Memory[] // relacionamento
+}
+
+model Memory {
+  id     String @id @default(uuid())
+  userId String
+
+  coverUrl  String
+  content   String
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id]) // relacionamento
 }

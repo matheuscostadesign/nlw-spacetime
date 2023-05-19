@@ -35,3 +35,6 @@
 
 - Prisma
   `npm i @prisma/client`
+
+- Instalar CORS
+  `npm i @fastify/cors`

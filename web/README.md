@@ -34,3 +34,6 @@ theme: {
 ```
 
 - Assim, podemos acessar/chamar a propriedade com `blur-full`
+
+- Instalar icones
+  `npm i lucide-react`
